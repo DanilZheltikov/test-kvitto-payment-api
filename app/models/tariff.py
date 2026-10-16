@@ -9,7 +9,7 @@ class Tariff(Base):
 
     id: Mapped[int] = mapped_column(
         Integer,
-        rimary_key=True,
+        primary_key=True,
         autoincrement=True
     )
     title: Mapped[str] = mapped_column(String, nullable=False)
