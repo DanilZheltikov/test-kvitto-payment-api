@@ -20,7 +20,7 @@ from app.schemas.types import (
 
 
 class PaymentCreate(BaseModel):
-    tariff_id: str = Field(min_length=1)
+    tariff_id: int = Field(strict=True, gt=0)
     email: EmailStr
     method: PaymentMethod
     installment_months: InstallmentMonths | None = None
@@ -66,7 +66,7 @@ class PaymentRead(BaseModel):
 
     id: UUID
     status: PaymentStatus
-    tariff_id: str
+    tariff_id: int
     amount: Money
     discount: Money
     method: PaymentMethod
