@@ -11,7 +11,7 @@ class TariffService:
 
     async def seed(self, session: AsyncSession) -> None:
         async with session.begin():
-            for title, price in DEFAULT_TARIFFS:
+            for title, price in DEFAULT_TARIFFS.items():
                 await tariff_repository.add_if_missing(session, title, price)
 
 
