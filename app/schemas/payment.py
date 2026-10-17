@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Self
 from uuid import UUID
 
 from pydantic import (
@@ -7,8 +8,10 @@ from pydantic import (
     EmailStr,
     Field,
     field_validator,
+    model_validator,
 )
 
+from app.core import constants
 from app.schemas.types import (
     InstallmentMonths,
     Money,
@@ -26,10 +29,29 @@ class PaymentCreate(BaseModel):
 
     @field_validator("promo_code")
     @classmethod
-    def normalize_promo_code(cls, value: str | None) -> str | None:
+    def validate_promo_code(cls, value: str | None) -> str | None:
         if value is None:
             return None
-        return value.upper() if value is not None else None
+
+        if value.upper() not in constants.PROMO_DISCOUNTS_PERCENT:
+            raise ValueError("Unknown promo code")
+
+        return value
+
+    @model_validator(mode="after")
+    def validate_installment(self) -> Self:
+        if self.method == PaymentMethod.INSTALLMENT:
+            if self.installment_months is None:
+                raise ValueError(
+                    "Installment months are required for installment payments"
+                )
+
+        elif self.installment_months is not None:
+            raise ValueError(
+                "Installment months are only allowed for installment payments"
+            )
+
+        return self
 
 
 class PaymentRead(BaseModel):

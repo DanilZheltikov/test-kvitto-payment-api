@@ -1,19 +1,3 @@
-class InvalidPromoCode(Exception):
-    """The requested promo code is not supported."""
-
-    def __init__(self, promo_code: str) -> None:
-        self.promo_code = promo_code
-        super().__init__("Unknown promo code")
-
-
-class InvalidInstallmentMonths(Exception):
-    """The installment term is missing or invalid for the payment method."""
-
-    def __init__(self, months: int | None, message: str) -> None:
-        self.months = months
-        super().__init__(message)
-
-
 class PaymentNotFound(Exception):
     """The requested payment does not exist."""
 

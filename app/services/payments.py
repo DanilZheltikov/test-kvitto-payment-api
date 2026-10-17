@@ -4,8 +4,6 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.exceptions import (
-    InvalidInstallmentMonths,
-    InvalidPromoCode,
     InvalidTransition,
     PaymentNotFound,
     TariffNotFound,
@@ -21,31 +19,11 @@ from app.models.payment import Payment
 from app.repositories.payment import payment_repository
 from app.repositories.tariff import tariff_repository
 from app.schemas.payment import PaymentCreate
-from app.schemas.types import PaymentMethod, PaymentStatus
+from app.schemas.types import PaymentStatus
 from app.services.money import apply_discount, build_schedule
 
 
 class PaymentService:
-    def _validate_create(self, data: PaymentCreate) -> None:
-        if (
-            data.promo_code is not None
-            and data.promo_code.upper() not in PROMO_DISCOUNTS_PERCENT
-        ):
-            raise InvalidPromoCode(data.promo_code)
-
-        months = data.installment_months
-        if data.method == PaymentMethod.INSTALLMENT:
-            if months is None:
-                raise InvalidInstallmentMonths(
-                    months,
-                    "Installment months are required for installment payments"
-                )
-        elif months is not None:
-            raise InvalidInstallmentMonths(
-                months,
-                "Installment months are only allowed for installment payments"
-            )
-
     @staticmethod
     def is_idempotency_conflict(exc: IntegrityError) -> bool:
         driver_error = exc.driver_exception
@@ -65,7 +43,6 @@ class PaymentService:
         """
         Return (payment, created); own the transaction on a fresh session.
         """
-        self._validate_create(data)
         try:
             async with session.begin():
                 if idempotency_key is not None:
