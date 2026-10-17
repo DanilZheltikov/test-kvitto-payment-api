@@ -1,4 +1,10 @@
-from sqlalchemy import BigInteger, CheckConstraint, Integer, String
+from sqlalchemy import (
+    BigInteger,
+    CheckConstraint,
+    Integer,
+    String,
+    UniqueConstraint
+)
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -16,5 +22,6 @@ class Tariff(Base):
     price: Mapped[int] = mapped_column(BigInteger, nullable=False)
 
     __table_args__ = (
+        UniqueConstraint("title", name="uq_tariffs_title"),
         CheckConstraint("price > 0", name="ck_tariffs_price_positive"),
     )
