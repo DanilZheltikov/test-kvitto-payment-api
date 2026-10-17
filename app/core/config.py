@@ -1,3 +1,4 @@
+from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy import URL
 
@@ -8,6 +9,7 @@ class Settings(BaseSettings):
     postgres_password: str
     db_host: str
     db_port: int
+    webhook_secret: SecretStr
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
