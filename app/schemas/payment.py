@@ -21,7 +21,7 @@ class PaymentCreate(BaseModel):
     tariff_id: int = Field(strict=True, gt=0)
     email: EmailStr
     method: PaymentMethod
-    installment_months: int | None = Field(default=None, strict=True)
+    installment_months: InstallmentMonths | None = None
     promo_code: str | None = None
 
     @field_validator("promo_code")
