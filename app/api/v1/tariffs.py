@@ -5,7 +5,6 @@ from app.models.tariff import Tariff
 from app.schemas.tariff import TariffRead
 from app.services.tariffs import tariff_service
 
-
 router = APIRouter(prefix="/tariffs")
 
 

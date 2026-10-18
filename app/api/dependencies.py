@@ -7,7 +7,6 @@ from app.core.config import settings
 from app.db.session import get_session
 from app.services.webhook_signature import verify_signature
 
-
 SessionDep = Annotated[AsyncSession, Depends(get_session)]
 
 IdempotencyKey = Annotated[

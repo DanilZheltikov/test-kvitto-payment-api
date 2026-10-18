@@ -3,17 +3,17 @@ from uuid import UUID
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.exceptions import (
-    InvalidTransition,
-    PaymentNotFound,
-    TariffNotFound,
-)
 from app.core.constants import (
     ALLOWED_TRANSITIONS,
     DEFAULT_DISCOUNT_PERCENT,
     NAME_IDEMPOTENCY_KEY_CONSTRAINT,
     PROMO_DISCOUNTS_PERCENT,
-    UNIQUE_VIOLATION_CODE
+    UNIQUE_VIOLATION_CODE,
+)
+from app.core.exceptions import (
+    InvalidTransition,
+    PaymentNotFound,
+    TariffNotFound,
 )
 from app.models.payment import Payment
 from app.repositories.payment import payment_repository

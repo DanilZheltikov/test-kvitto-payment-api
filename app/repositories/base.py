@@ -1,16 +1,15 @@
-from typing import Generic, TypeVar
+from typing import TypeVar
 from uuid import UUID
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.base import Base
 
-
 ModelType = TypeVar("ModelType", bound=Base)
 IdType = TypeVar("IdType", int, UUID)
 
 
-class BaseRepository(Generic[ModelType, IdType]):
+class BaseRepository[ModelType: Base, IdType: (int, UUID)]:
     def __init__(self, model: type[ModelType]) -> None:
         self.model = model
 

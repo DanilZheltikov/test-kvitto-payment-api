@@ -10,7 +10,6 @@ from app.models.payment import Payment
 from app.models.tariff import Tariff
 from app.schemas.types import PaymentMethod, PaymentStatus
 
-
 PAYMENTS_URL = "/api/v1/payments"
 EMAILS = ("alice@example.com", "bob@example.com")
 

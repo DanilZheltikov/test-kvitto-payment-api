@@ -2,7 +2,6 @@ import pytest
 
 from app.services.money import apply_discount, build_schedule
 
-
 BASIC_PRICE = 990_000
 STANDARD_PRICE = 1_990_000
 PREMIUM_PRICE = 2_990_000

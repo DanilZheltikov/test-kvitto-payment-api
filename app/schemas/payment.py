@@ -16,7 +16,7 @@ from app.schemas.types import (
     InstallmentMonths,
     Money,
     PaymentMethod,
-    PaymentStatus
+    PaymentStatus,
 )
 
 

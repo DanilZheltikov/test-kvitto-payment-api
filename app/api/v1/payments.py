@@ -11,7 +11,6 @@ from app.schemas.payment import PaymentCreate, PaymentRead
 from app.schemas.types import PaymentStatus
 from app.services.payments import payment_service
 
-
 router = APIRouter(prefix="/payments")
 
 

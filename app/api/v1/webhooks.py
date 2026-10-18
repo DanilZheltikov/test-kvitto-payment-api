@@ -5,7 +5,6 @@ from app.api.docs import BANK_WEBHOOK_RESPONSES
 from app.schemas.webhook import BankWebhook, WebhookResponse
 from app.services.payments import payment_service
 
-
 router = APIRouter(prefix="/webhooks")
 
 

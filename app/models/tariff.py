@@ -3,7 +3,7 @@ from sqlalchemy import (
     CheckConstraint,
     Integer,
     String,
-    UniqueConstraint
+    UniqueConstraint,
 )
 from sqlalchemy.orm import Mapped, mapped_column
 

@@ -1,6 +1,5 @@
 from app.schemas.types import PaymentStatus
 
-
 UNIQUE_VIOLATION_CODE = "23505"
 NAME_IDEMPOTENCY_KEY_CONSTRAINT = "uq_payments_idempotency_key"
 

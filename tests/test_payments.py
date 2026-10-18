@@ -10,7 +10,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.payment import Payment
 from app.models.tariff import Tariff
 
-
 PAYMENTS_URL = "/api/v1/payments"
 TEST_EMAIL = "customer@example.com"
 IDEMPOTENCY_KEY = "payment-test-key"
@@ -274,7 +273,7 @@ async def test_create_installment_rejects_invalid_months(
     client: AsyncClient,
     db_session: AsyncSession,
     payment_payload: PaymentPayload,
-    months: int | float | str,
+    months: int | float | str,  # noqa: PYI041
 ) -> None:
     payment_payload.update(method="installment", installment_months=months)
     response = await client.post(PAYMENTS_URL, json=payment_payload)
